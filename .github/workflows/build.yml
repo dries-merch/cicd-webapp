@@ -10,10 +10,21 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 18
       - run: yarn install
+
       - name: Execute linting
         run: yarn lint
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v4
+        with:
+          file: ./Dockerfile
+          push: false
+          tags: driesmerch/webapp:latest
+      - name: Check Docker built result
+        run: echo "Docker built succeeded"
