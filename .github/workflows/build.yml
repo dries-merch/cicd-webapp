@@ -31,6 +31,6 @@ jobs:
         with:
           file: ./Dockerfile
           push: true
-          tags: DOCKERHUB_USERNAME/webapp:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/webapp:latest
       - name: Check Docker built result
         run: echo "Docker built succeeded"
