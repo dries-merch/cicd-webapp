@@ -20,11 +20,17 @@ jobs:
       - name: Execute linting
         run: yarn lint
 
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PSWD }}
+
       - name: Build Docker image
         uses: docker/build-push-action@v4
         with:
           file: ./Dockerfile
-          push: false
-          tags: driesmerch/webapp:latest
+          push: true
+          tags: DOCKERHUB_USERNAME/webapp:latest
       - name: Check Docker built result
         run: echo "Docker built succeeded"
